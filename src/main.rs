@@ -1,3 +1,9 @@
+use output::{print_green, print_red};
+
+mod output;
+
 fn main() {
-    println!("Hello, World!");
+    print_green("Test");
+    print_red("Test 2");
+    println!("Hello");
 }
