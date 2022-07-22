@@ -45,7 +45,13 @@ fn list_notes(path: &Path) -> Result<(), String> {
 }
 
 fn main() {
-    print_green("Test");
-    print_red("Test 2");
-    println!("Hello");
+    let args = parse_args().expect("Failed to read args");
+    let notes_folder_path = get_notes_folder_path().expect("Failed to get notes path");
+
+    if args.note.is_none() {
+        list_notes(&notes_folder_path).expect("No valid command to list directory contents");
+        return;
+    }
+
+    println!("aeou");
 }
