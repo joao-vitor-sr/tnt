@@ -1,5 +1,5 @@
 pub struct Args {
-    pub note: String,
+    pub note: Option<String>,
     pub remove: bool,
 }
 
@@ -25,8 +25,5 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
         }
     }
 
-    Ok(Args {
-        note: note.ok_or("missing argument NOTE")?,
-        remove,
-    })
+    Ok(Args { note, remove })
 }
