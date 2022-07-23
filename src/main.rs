@@ -11,7 +11,7 @@ use crate::args::parse_args;
 pub mod args;
 mod output;
 
-fn get_notes_folder_path() -> io::Result<PathBuf> {
+fn return_notes_folder() -> io::Result<PathBuf> {
     match env::var("XDG_DATA_HOME") {
         Ok(val) => {
             let mut path = PathBuf::from(val);
@@ -42,6 +42,34 @@ fn list_notes(path: &Path) -> Result<(), String> {
         );
     }
     Ok(())
+}
+
+fn input_yn(msg: &str) -> io::Result<bool> {
+    println!("{msg}");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input)?;
+    Ok(&input.to_uppercase().trim()[0..1] == "Y")
+}
+
+fn create_note(note_path: &Path, confirm: bool) -> io::Result<bool> {
+    if confirm && !input_yn("\nThis note doesn't exist, do you want to create it? [Y/n]")? {
+        return Ok(false);
+    }
+    println!("Create note");
+    Ok(true)
+}
+
+fn edit_note(note_path: &Path) {
+    if !note_path.exists() && !create_note(&note_path, true).expect("Failed to create note") {
+        return;
+    }
+    println!("Edit note");
+}
+
+fn return_note_filename(note: &String) -> String {
+    let mut final_note_filename = note.clone().replace(" ", "_").to_lowercase();
+    final_note_filename.push_str(".md");
+    final_note_filename
 }
 
 fn main() {
