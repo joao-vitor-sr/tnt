@@ -1,7 +1,7 @@
 use std::{
     env,
     fs::{self, File},
-    io,
+    io::{self, ErrorKind},
     path::{Path, PathBuf},
     process::Command,
 };
@@ -69,11 +69,21 @@ fn create_note(note_path: &Path, confirm: bool) -> io::Result<bool> {
     Ok(true)
 }
 
-fn edit_note(note_path: &Path) {
-    if !note_path.exists() && !create_note(&note_path, true).expect("Failed to create note") {
-        return;
+fn edit_note(note_path: &Path) -> io::Result<()> {
+    if !note_path.exists() && !create_note(&note_path, true)? {
+        return Err(io::Error::new(
+            ErrorKind::Other,
+            "Note path 
+            doesn't exist! Try creating a folder called
+            \"tnt\" in the XDG_DATA_HOME or in the /usr/share",
+        ));
     }
+    Command::new(env::var("EDITOR").unwrap())
+        .arg(&note_path)
+        .spawn()?
+        .wait()?;
     println!("Edit note");
+    Ok(())
 }
 
 fn return_note_filename(note: &String) -> String {
