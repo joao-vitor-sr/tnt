@@ -6,14 +6,15 @@ use std::{
     process::Command,
 };
 
+use cli::{input_yn, list_files};
 use output::{print_green, print_red};
 
-use crate::args::parse_args;
+use crate::cli::parse_args;
 
-pub mod args;
+pub mod cli;
 mod output;
 
-fn create_notes_folder(path: &Path) -> io::Result<()> {
+fn create_folder(path: &Path) -> io::Result<()> {
     fs::create_dir(&path)?;
     let mut perms = fs::metadata(&path)?.permissions();
     perms.set_readonly(false);
@@ -27,38 +28,18 @@ fn return_notes_folder() -> io::Result<PathBuf> {
             let mut path = PathBuf::from(val);
             path.push("tnt");
             if !path.exists() {
-                create_notes_folder(&path)?;
+                create_folder(&path)?;
             }
             return Ok(path);
         }
         Err(_) => {
             let path = PathBuf::from("/usr/share/tnt");
             if !Path::new(&path).exists() {
-                create_notes_folder(&path)?;
+                create_folder(&path)?;
             }
             return Ok(path);
         }
     };
-}
-
-fn list_notes(path: &Path) -> Result<(), String> {
-    for file in fs::read_dir(path).unwrap() {
-        println!(
-            "{}",
-            file.unwrap()
-                .file_name()
-                .to_str()
-                .expect("Failed to transform OsStr into str")
-        );
-    }
-    Ok(())
-}
-
-fn input_yn(msg: &str) -> io::Result<bool> {
-    println!("{msg}");
-    let mut input = String::new();
-    io::stdin().read_line(&mut input)?;
-    Ok(&input.to_uppercase().trim()[0..1] == "Y")
 }
 
 fn create_note(note_path: &Path, confirm: bool) -> io::Result<bool> {
@@ -97,7 +78,7 @@ fn main() {
     let mut notes_path = return_notes_folder().expect("Failed to get notes path");
 
     if args.note.is_none() {
-        list_notes(&notes_path).expect("No valid command to list directory contents");
+        list_files(&notes_path).expect("No valid command to list directory contents");
         return;
     }
 

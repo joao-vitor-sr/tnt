@@ -1,6 +1,22 @@
+use std::path::Path;
+
 pub struct Args {
     pub note: Option<String>,
     pub remove: bool,
+}
+
+pub fn list_files(path: &Path) -> std::io::Result<()> {
+    for file in std::fs::read_dir(path).unwrap() {
+        println!("{:?}", file?.file_name());
+    }
+    Ok(())
+}
+
+pub fn input_yn(msg: &str) -> std::io::Result<bool> {
+    println!("{msg}");
+    let mut input = String::new();
+    std::io::stdin().read_line(&mut input)?;
+    Ok(&input.to_uppercase().trim()[0..1] == "Y")
 }
 
 pub fn parse_args() -> Result<Args, lexopt::Error> {
