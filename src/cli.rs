@@ -19,8 +19,7 @@ pub fn list_files(path: &Path) -> std::io::Result<()> {
     Ok(())
 }
 
-pub fn input_yn(msg: &str) -> std::io::Result<bool> {
-    println!("{msg}");
+pub fn input_yn() -> std::io::Result<bool> {
     let mut input = String::new();
     std::io::stdin().read_line(&mut input)?;
     Ok(&input.to_uppercase().trim()[0..1] == "Y")

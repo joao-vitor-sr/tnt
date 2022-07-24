@@ -43,7 +43,10 @@ fn return_notes_folder() -> io::Result<PathBuf> {
 }
 
 fn create_note(note_path: &Path, confirm: bool) -> io::Result<bool> {
-    if confirm && !input_yn("\nThis note doesn't exist, do you want to create it? [Y/n]")? {
+    if confirm {
+        println!("\nThis note doesn't exist, do you want to create it? [Y/n]");
+    }
+    if confirm && !input_yn()? {
         return Ok(false);
     }
     File::create(note_path)?;
@@ -73,6 +76,16 @@ fn return_note_filename(note: &String) -> String {
     final_note_filename
 }
 
+fn remove_note(note_path: &Path) -> io::Result<()> {
+    print_red("Are you sure that you want to delete this note? <Y/n>");
+    if !input_yn()? {
+        return Ok(());
+    }
+    fs::remove_file(note_path)?;
+    print_green("Note removed!");
+    Ok(())
+}
+
 fn main() {
     let args = parse_args().expect("Failed to read args");
     let mut notes_path = return_notes_folder().expect("Failed to get notes path");
@@ -87,6 +100,11 @@ fn main() {
 
     notes_path.push(note_filename);
 
+    if args.remove {
+        remove_note(&notes_path.as_path()).expect("Failed to remove note");
+        return;
+    }
+
     print_green(&note[..]);
-    edit_note(&notes_path.as_path());
+    edit_note(&notes_path.as_path()).expect("Failed to edit note!");
 }
