@@ -25,6 +25,17 @@ pub fn input_yn() -> std::io::Result<bool> {
     Ok(&input.to_uppercase().trim()[0..1] == "Y")
 }
 
+fn print_help() {
+    println!(
+        "\tUSAGE:
+            tnt [NOTE] <args>
+        FLAGS:
+            -h, --help              Prints help information
+            -v, --version           Prints version information
+            -r, --remove            Removes the note"
+    );
+}
+
 pub fn parse_args() -> Result<Args, lexopt::Error> {
     use lexopt::prelude::*;
 
@@ -40,7 +51,7 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
                 note = Some(val.into_string()?);
             }
             Short('h') | Long("help") => {
-                println!("Usage: tnt [-r|--remove] NOTE");
+                print_help();
                 std::process::exit(0);
             }
             _ => return Err(arg.unexpected()),
