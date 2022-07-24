@@ -7,7 +7,14 @@ pub struct Args {
 
 pub fn list_files(path: &Path) -> std::io::Result<()> {
     for file in std::fs::read_dir(path).unwrap() {
-        println!("{:?}", file?.file_name());
+        println!(
+            "{}",
+            file?
+                .file_name()
+                .into_string()
+                .expect("Failed to transform note filename into String")
+                .replace(".md", "")
+        );
     }
     Ok(())
 }
