@@ -1,7 +1,7 @@
 # tnt
 
 `tnt` is a program to manage notes in your terminal. It uses files in the
-[Markdown](https://en.wikipedia.org/wiki/Markdown) format so it's possible
+[Markdown](https://en.wikipedia.org/wiki/Markdown) format, so it's possible
 to sync the files between devices
 
 Quick links
@@ -24,18 +24,18 @@ version.
 Create a note
 
 ```bash
-tnt note1
+tnt "note_name"
 ```
 
-If a note already exists it will edit the note using the default $EDITOR
+If the note already exists, the default `$EDITOR` will be used to edit the note
 
 Remove a note
 
 ```bash
-tnt note1 -r
+tnt "note_name" -r
 ```
 
-Find all notes
+List all notes
 
 ```bash
 tnt
