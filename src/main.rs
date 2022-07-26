@@ -6,7 +6,7 @@ use std::{
     process::Command,
 };
 
-use cli::{input_yn, list_files};
+use cli::{input_yn, list_files, print_version};
 use output::{print_green, print_red};
 
 use crate::cli::parse_args;
@@ -89,6 +89,11 @@ fn remove_note(note_path: &Path) -> io::Result<()> {
 fn main() {
     let args = parse_args().expect("Failed to read args");
     let mut notes_path = return_notes_folder().expect("Failed to get notes path");
+
+    if args.version {
+        print_version();
+        return;
+    }
 
     if args.note.is_none() {
         list_files(&notes_path).expect("No valid command to list directory contents");

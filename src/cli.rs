@@ -1,8 +1,17 @@
 use std::path::Path;
 
+use crate::output::print_green;
+
 pub struct Args {
     pub note: Option<String>,
     pub remove: bool,
+    pub version: bool,
+}
+
+pub fn print_version() {
+    let message: Option<&str> = option_env!("CARGO_PKG_VERSION");
+    print_green(message.unwrap_or("Unknown version"));
+    return;
 }
 
 pub fn list_files(path: &Path) -> std::io::Result<()> {
@@ -41,6 +50,7 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
 
     let mut note = None;
     let mut remove = false;
+    let mut version = false;
     let mut parser = lexopt::Parser::from_env();
     while let Some(arg) = parser.next()? {
         match arg {
@@ -50,6 +60,9 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
             Value(val) if note.is_none() => {
                 note = Some(val.into_string()?);
             }
+            Short('v') | Long("version") => {
+                version = true;
+            }
             Short('h') | Long("help") => {
                 print_help();
                 std::process::exit(0);
@@ -58,5 +71,9 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
         }
     }
 
-    Ok(Args { note, remove })
+    Ok(Args {
+        note,
+        remove,
+        version,
+    })
 }
