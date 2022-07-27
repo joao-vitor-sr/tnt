@@ -64,7 +64,7 @@ Installing the manual page requires the additional dependency `gzip`.
 
 ```sh
 sudo mkdir -p /usr/local/share/man/man1
-gzip -c docs/tnt.man | sudo tee /usr/local/share/man/man1/tnt.1.gz > /dev/null
+gzip -c extra/tnt.man | sudo tee /usr/local/share/man/man1/tnt.1.gz > /dev/null
 ```
 
 ### Shell completions
