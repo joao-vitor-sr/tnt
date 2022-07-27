@@ -7,7 +7,7 @@ to sync the files between devices
 Quick links
 
 - [How to use](#how-to-use)
-- [Installation](#installation)
+- [Installation](INSTALL.md)
 
 ## Demo
 
@@ -56,7 +56,3 @@ FLAGS:
     -v, --version           Prints version information
     -r, --remove            Removes the note
 ```
-
-## Installation
-
-_for now the tnt has no installer, it will be added in later releases_
