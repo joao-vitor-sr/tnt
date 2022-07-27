@@ -1,6 +1,6 @@
 .\" Manpage for tnt.
 .\" Contact joaovitorsrs7@gmail.com to correct errors or typos.
-.TH TNT 8 2022-07-26 "" "Terminal-based Note Taking app"
+.TH TNT 1 2022-07-26 "" "Terminal-based Note Taking app"
 .SH NAME
 tnt \- Manage notes by the terminal
 .SH SYNOPSIS
