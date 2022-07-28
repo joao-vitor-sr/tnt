@@ -86,5 +86,5 @@ To install the completions for bash, you can add the following command
 in your `~/.bashrc` file.
 
 ```sh
-complete -F _longopt myprogram
+complete -F _longopt tnt
 ```
