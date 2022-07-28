@@ -11,7 +11,7 @@ Quick links
 
 ## Demo
 
-![Demo](docs/screenshot.svg)
+![Demo](extra/showcase.png)
 
 ## How to use
 
