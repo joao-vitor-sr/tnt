@@ -2,6 +2,18 @@ use std::path::Path;
 
 use crate::output::print_green;
 
+const HELP: &str = "\
+Usage: 
+  tnt NOTE [OPTIONS]
+
+META OPTIONS:
+    -h, --help          show list of command-line options
+    -v, --version       show version of tnt
+OPTIONS:
+    -r, --remove        remove the defined note
+ARGS:
+    <NOTE>              input note";
+
 pub struct Args {
     pub note: Option<String>,
     pub remove: bool,
@@ -35,14 +47,7 @@ pub fn input_yn() -> std::io::Result<bool> {
 }
 
 fn print_help() {
-    println!(
-        "\tUSAGE:
-            tnt [NOTE] <args>
-        FLAGS:
-            -h, --help              Prints help information
-            -v, --version           Prints version information
-            -r, --remove            Removes the note"
-    );
+    print!("{}", HELP);
 }
 
 pub fn parse_args() -> Result<Args, lexopt::Error> {

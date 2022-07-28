@@ -49,10 +49,14 @@ This is the output of `tnt -h`. To see the full set of command-line options, use
 also includes a much more detailed help text.
 
 ```
-USAGE:
-    tnt [NOTE] <args>
-FLAGS:
-    -h, --help              Prints help information
-    -v, --version           Prints version information
-    -r, --remove            Removes the note
+Usage: 
+  tnt NOTE [OPTIONS]
+
+META OPTIONS:
+    -h, --help          show list of command-line options
+    -v, --version       show version of tnt
+OPTIONS:
+    -r, --remove        remove the defined note
+ARGS:
+    <NOTE>              input note";
 ```
