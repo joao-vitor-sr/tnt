@@ -1,7 +1,7 @@
 # Cargo Installation
 
 If you're just interested in the tnt binary and you don't need the
-[manual page](#manual-page) or [shell completions](#shell-completions), you can
+[manual page](#manual-page), you can
 install it directly through cargo:
 
 ```sh
@@ -20,7 +20,6 @@ cargo install tnt-note
    2. [Shell completions](#shell-completions)
       1. [Zsh](#zsh)
       2. [Bash](#bash)
-      3. [Fish](#fish)
 
 ## Prerequisites
 
@@ -73,46 +72,19 @@ To get automatic completions for tnt's flags and arguments you can install the p
 
 #### Zsh
 
-To install the completions for zsh, you can place the `extra/completions/_tnt` file in any
-directory referenced by `$fpath`.
-
-If you do not already have such a directory registered through your `~/.zshrc`, you can add one like this:
+To install the completions for zsh, you can set up using complete
 
 ```sh
-mkdir -p ${ZDOTDIR:-~}/.zsh_functions
-echo 'fpath+=${ZDOTDIR:-~}/.zsh_functions' >> ${ZDOTDIR:-~}/.zshrc
+complete _gnu_generic tnt
 ```
 
-Then copy the completion file to this directory:
-
-```sh
-cp extra/completions/_tnt ${ZDOTDIR:-~}/.zsh_functions/_tnt
-```
+Place it in your `~/.zshrc`
 
 #### Bash
 
-To install the completions for bash, you can `source` the `extra/completions/tnt.bash` file
+To install the completions for bash, you can add the following command
 in your `~/.bashrc` file.
 
-If you do not plan to delete the source folder of tnt, you can run
-
 ```sh
-echo "source $(pwd)/extra/completions/tnt.bash" >> ~/.bashrc
-```
-
-Otherwise you can copy it to the `~/.bash_completion` folder and source it from there:
-
-```sh
-mkdir -p ~/.bash_completion
-cp extra/completions/tnt.bash ~/.bash_completion/tnt
-echo "source ~/.bash_completion/tnt" >> ~/.bashrc
-```
-
-#### Fish
-
-To install the completions for fish, run
-
-```
-mkdir -p $fish_complete_path[1]
-cp extra/completions/tnt.fish $fish_complete_path[1]/tnt.fish
+complete -F _longopt myprogram
 ```
