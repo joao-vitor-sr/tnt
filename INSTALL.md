@@ -49,7 +49,7 @@ cd tnt
 cargo build --release
 ```
 
-If all goes well, this should place a binary at `target/release/tnt`.
+If all goes well, this should place a binary at `target/release/tnt-note`.
 
 ## Post Build
 

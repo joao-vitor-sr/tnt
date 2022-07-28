@@ -1,5 +1,5 @@
 [package]
-name = "tnt"
+name = "tnt-note"
 version = "0.1.0"
 edition = "2021"
 authors = ["João Vitor Silveira Ribeiro <joaovitorsrs7@gmail.com>"]
@@ -16,7 +16,3 @@ categories = ["command-line-utilities"]
 [dependencies]
 ansi_term = "0.12.1"
 lexopt = "0.2.1"
-
-[[bin]]
-name = "tnt"
-

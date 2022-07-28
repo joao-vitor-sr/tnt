@@ -18,7 +18,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "478ee9e62aaeaf5b140bd4138753d1f109765488581444218d3ddda43234f3e8"
 
 [[package]]
-name = "tnt"
+name = "tnt-note"
 version = "0.1.0"
 dependencies = [
  "ansi_term",
