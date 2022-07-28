@@ -11,7 +11,7 @@ Quick links
 
 ## Demo
 
-![Demo](extra/showcase.png)
+![Demo](extra/images/showcase.png)
 
 ## How to use
 
