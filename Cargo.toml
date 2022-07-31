@@ -1,6 +1,6 @@
 [package]
 name = "tnt-note"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["João Vitor Silveira Ribeiro <joaovitorsrs7@gmail.com>"]
 description = "A terminal-based note taking app"
