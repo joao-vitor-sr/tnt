@@ -17,7 +17,6 @@ ARGS:
 pub struct Args {
     pub note: Option<String>,
     pub remove: bool,
-    pub version: bool,
 }
 
 pub fn print_version() {
@@ -55,7 +54,6 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
 
     let mut note = None;
     let mut remove = false;
-    let mut version = false;
     let mut parser = lexopt::Parser::from_env();
     while let Some(arg) = parser.next()? {
         match arg {
@@ -66,7 +64,8 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
                 note = Some(val.into_string()?);
             }
             Short('v') | Long("version") => {
-                version = true;
+                print_version();
+                std::process::exit(0);
             }
             Short('h') | Long("help") => {
                 print_help();
@@ -79,6 +78,5 @@ pub fn parse_args() -> Result<Args, lexopt::Error> {
     Ok(Args {
         note,
         remove,
-        version,
     })
 }
